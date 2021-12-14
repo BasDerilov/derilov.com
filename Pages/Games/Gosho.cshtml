@@ -7,13 +7,13 @@
 <html>
     <head>
         <title>Гошо the snake</title>
-        <h3 id="point-board">0</h3>
     </head>
 <body style="background-color: rgb(68, 68, 68);">
 <div class="content" id="main-div">
 <h1 class="center" style="color: cornsilk;">
 	Гошо змията алкохолик
 </h1>
+<h3 id="point-board">0</h3>
 
 <canvas class="center" tabindex="-1" id="snakeBoard"></canvas><br>
 <span id="vodkaSquare" class="vodka"></span>
@@ -24,6 +24,16 @@
 </body>
 
 <style>
+    #point-board {
+        background-color: greenyellow;
+        width: fit-content;
+        padding: 3px;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        margin: auto;
+        margin-bottom: 0;
+        text-align: center;
+    }
     #trademark {
         margin-top: 1000px;
     }
@@ -78,7 +88,7 @@
     const divForReferance = document.getElementById("main-div")
 
     let divWidth = divForReferance.clientWidth
-    var scoreBoard = document.getElementById("point-boards")
+    const scoreBoard = document.getElementById("point-board")
     
     if (divWidth > 1000) {
         canvas.width = 1000
@@ -134,6 +144,7 @@
         let lastTime = Date.now()
         const interval = setInterval(function onTick()
         {
+            UpdateScore()
             ClearCanvas();
             if (Date.now() - lastTime > speed) {
                 if (keydownEvents.length) {
@@ -141,10 +152,8 @@
                     const len = 1;
                     for (let i = 0; i < len; i++)
                         ChangeDirection(keydownEvents[i]);
-                        UpdateScore()
                     for (let i = 0; i < len; i++)
                         keydownEvents.shift()
-                        UpdateScore()
                 }
                 MoveSnake();
                 lastTime = Date.now();
@@ -252,9 +261,11 @@
         }
     }
 
-    function UpdateScore(
+    function UpdateScore() 
+    {
         points = gosho.length * vodkaCount
-    )
+        scoreBoard.textContent = points
+    }
 
     function HasDied()
     {
@@ -289,10 +300,6 @@
 
         context.fillStyle = "white"
         context.fillText("Натисни \"space\"", 380, 300)
-
-        context.fillStyle = "white"
-        context.fillText("Резултат: "+ points, 350, 400)
-        
     }
     
     function RestartGame()
@@ -309,6 +316,7 @@
         dy = 0;
 
         speed = 100;
+        vodkaCount = 0;
 
         RemoveAllMeat();
         GenerateNewMeat();
