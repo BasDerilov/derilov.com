@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
 
 namespace fictionsplash
 {
@@ -32,6 +33,10 @@ namespace fictionsplash
                 enabled: sp.GetRequiredService<IWebHostEnvironment>().IsDevelopment(),
                 logger: sp.GetRequiredService<ILogger<NpmWatchHostedService>>()));
             #endif
+
+            services.Configure<ForwardedHeadersOptions>(options =>{
+                options.KnownProxies.Add(IPAddress.Parse("192.168.0.100"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
