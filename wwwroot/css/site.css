@@ -127,6 +127,44 @@ h1 {
   }
 }
 
+.gosho-background {
+  background-color: #55d284;
+  background: linear-gradient(45deg, #55d284, #f2cf07);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.UPG-background {
+  background-color: #f6ebe6;
+  background: linear-gradient(45deg, #f6ebe6, #aee1f9);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .home-holo {
   background-color: black;
   opacity: 0.2;
@@ -294,7 +332,7 @@ body {
   margin: auto;
   color: white;
   padding: 10px;
-  border: solid greenyellow;
+  border: solid #05D6D9;
   margin-bottom: 5px;
   display: flex;
   max-height: fit-content;

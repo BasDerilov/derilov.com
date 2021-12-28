@@ -71,6 +71,14 @@ h1{
     color: black;
 }
 
+.gosho-background{
+    @include gradient-background(map.get($g-merciful-enemy,1),map.get($g-merciful-enemy,2))
+}
+
+.UPG-background{
+    @include gradient-background(map.get($g-lion-milk,1), map.get($g-lion-milk,2));
+}
+
 .home-holo{
     @include hologram();
     width: fit-content;
@@ -234,7 +242,7 @@ body{
     margin: auto;
     color: white;
     padding: 10px;
-    border: solid greenyellow;
+    border: solid #05D6D9;
     margin-bottom: 5px;
     display: flex;
     max-height: fit-content;
