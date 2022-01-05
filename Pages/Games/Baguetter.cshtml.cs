@@ -4,7 +4,7 @@ using fictionsplash.Pages;
 
 namespace fictionsplash.Pages.Games
 {
-    public class UPGModel : PageModel
+    public class BaguetterModel : PageModel
     {
         public void OnGet()
         {
