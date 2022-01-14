@@ -17,33 +17,47 @@
     app.stage.addChild(sprite);
     console.log('sprite loaded')
 
-    let 
+    speed = 15;
 
     let elapsed = 0.0;
-    var event;
+    var events = [];
     document.addEventListener('keydown', event => {
-        
+        events.push(event)
     })
     
     app.ticker.add((delta) => {
         elapsed += delta;
 
-        if(hasMoved)
+        if(events.length > 0)
         {
-            BaguetteMove(event);
+            BaguetteDo(events.pop());
         }
     })
 
-    function BaguetteMove(event){
-        if(event.keyCode === 65)
-        {
-            sprite.x-=150 / delta;
-            console.log('moving left')
+    const W_KEY = 87
+    const S_KEY = 83
+    const D_KEY = 68
+    const A_KEY = 65
+    const UP_ARROW = 38
+    const DOWN_ARROW = 40
+    const RIGHT_ARROW = 39
+    const LEFT_ARROW = 37
+    const SPACE_KEY = 32
+    
+    function BaguetteDo(event){
+        switch(event.keyCode){
+            case D_KEY || RIGHT_ARROW:
+                sprite.x += speed
+                break;
+            
+            case A_KEY || LEFT_ARROW:
+                sprite.x -= speed
+                break;
+
+            case SPACE_KEY:
+                console.log('Shooting')
+                break;
         }
-        else if(event.keyCode === 68)
-        {
-            sprite.x+=150 / delta;
-            console.log('moving right')
-        }
+
     }
 </script>
