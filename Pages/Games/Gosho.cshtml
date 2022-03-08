@@ -1,4 +1,5 @@
 @page
+@namespace fictionsplash.Pages.Games
 @model GoshoModel
 @{
     ViewData["Title"] = "Gosho";
@@ -8,7 +9,7 @@
     <head>
         <title>Гошо the snake</title>
     </head>
-<body style="background-color: rgb(68, 68, 68);">
+<body class="gosho-background">
 <div class="content" id="main-div">
 <h1 class="center" style="color: cornsilk;">
 	Гошо змията алкохолик
@@ -109,8 +110,8 @@
         }
     });
 
-    goshoColor = "#0b8fe8"
-    goshoBoarderColor = "#39db61"
+    goshoColor = "#55d284"
+    goshoBoarderColor = "#f2cf07"
 
     let gosho = [ 
         {x: 200, y: 200}, 
@@ -126,11 +127,13 @@
 
     let vodkaBottles = []
 
-    let vodkaCount = 0;
+    let vodkaEatenCount = 0;
+
+    let meatEaten = 0;
+
+    var points = 0;
     
     var speed = 100;
-
-    var points = gosho.length * vodkaCount
 
     for(let i = 0;i < 3; i++)
     {
@@ -201,6 +204,7 @@
         if(ElementsCollide(headNow, meats))
         {
             gosho.unshift(head)
+            meatEaten++;
 
             RemoveAllMeat()
             GenerateNewMeat()
@@ -208,7 +212,7 @@
         else if(ElementsCollide(headNow, vodkaBottles))
         {
             speed-=5;
-            vodkaCount++;
+            vodkaEatenCount++;
 
             gosho.unshift(head);
             gosho.pop();
@@ -225,10 +229,16 @@
     function ChangeDirection(event) 
     {
         const LEFT_KEY = 65;
-        const RIGHT_KEY = 68; 
+        const LEFT_ARROW = 37;
+        const RIGHT_KEY = 68;
+        const RIGHT_ARROW = 39; 
         const UP_KEY = 87;
+        const UP_ARROW = 38;
         const DOWN_KEY = 83;
+        const DOWN_ARROW = 40;
         const SPACE_KEY = 32;
+
+        console.log(event)
  
         var keyPressed = event.keyCode;
         var goingUp = dy === -10;
@@ -236,25 +246,25 @@
         var goingRight = dx === 10;  
         var goingLeft = dx === -10;
  
-        if (keyPressed === LEFT_KEY && !goingRight)
+        if (!goingRight && (keyPressed === LEFT_KEY) || (keyPressed === LEFT_ARROW) && !goingRight)
         {    
             dx = -10;
             dy = 0;  
         }
     
-        if (keyPressed === UP_KEY && !goingDown)
+        if (!goingDown && (keyPressed === UP_KEY) || (keyPressed === UP_ARROW) && !goingDown)
         {    
             dx = 0;
             dy = -10;
         }
     
-        if (keyPressed === RIGHT_KEY && !goingLeft)
+        if (!goingLeft && (keyPressed === RIGHT_KEY) || (keyPressed === RIGHT_ARROW) && !goingLeft)
         {    
             dx = 10;
             dy = 0;
         }
     
-        if (keyPressed === DOWN_KEY && !goingUp)
+        if (!goingUp && (keyPressed === DOWN_KEY) || (keyPressed === DOWN_ARROW) && !goingUp)
         {    
             dx = 0;
             dy = 10;
@@ -263,7 +273,8 @@
 
     function UpdateScore() 
     {
-        points = gosho.length * vodkaCount
+        scoreBoard.textContent = "0";
+        points = meatEaten * (vodkaEatenCount+1)
         scoreBoard.textContent = points
     }
 
@@ -294,12 +305,13 @@
 
     function DeathMessage()
     {   
+        context.textAlign = "center";
         context.font = "30px Arial"
         context.fillStyle = "red"
-        context.fillText("Гошо умря от цироза", 350, 200);
+        context.fillText("Гошо умря от цироза",canvas.width/2, canvas.height/2 -50);
 
         context.fillStyle = "white"
-        context.fillText("Натисни \"space\"", 380, 300)
+        context.fillText("Натисни \"space\"",canvas.width/2, canvas.height/2);
     }
     
     function RestartGame()
@@ -316,7 +328,8 @@
         dy = 0;
 
         speed = 100;
-        vodkaCount = 0;
+        vodkaEatenCount = 0;
+        meatEaten = 0;
 
         RemoveAllMeat();
         GenerateNewMeat();
