@@ -47,5 +47,5 @@ jobs:
       run: dotnet publish
 
     - name: Deploy
-      run: export RUNNER_TRACKING_ID="" && nohup dotnet ~/bin/Debug/net6.0/publish/fictionsplash.dll &
+      run: export RUNNER_TRACKING_ID="" && nohup dotnet run &
       #run: nohup dotnet ~/bin/Debug/net6.0/publish/fictionsplash.dll &
