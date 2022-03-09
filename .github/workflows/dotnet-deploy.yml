@@ -32,4 +32,4 @@ jobs:
     - name: Publish app
       run: dotnet publish
     - name: Deploy
-      run: dotnet ~/bin/Debug/net6.0/publish/fictionsplash.dll &
+      run: nohup dotnet ~/bin/Debug/net6.0/publish/fictionsplash.dll &
