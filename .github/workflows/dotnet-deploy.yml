@@ -30,7 +30,7 @@ jobs:
 
     steps:
     - name: Kill running server if present
-      if: DOTNET-PID != null
+      if: env.DOTNET-PID != null
       run: kill `pgrep dotnet`
     
     - name: Publish app
