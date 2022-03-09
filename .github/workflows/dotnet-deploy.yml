@@ -5,9 +5,9 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  build:
 
-    runs on: self-hosted
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v2
@@ -20,5 +20,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       run: npm run build:css
+    
+    deploy:
     - name: Deploy
       run: dotnet run --no-build
