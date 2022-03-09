@@ -31,7 +31,7 @@ jobs:
     steps:
     - name: Kill running server if present
       if: env.DOTNET_PID != 0
-      run: kill $DOTNET-PID
+      run: kill $DOTNET_PID
     
     - name: Publish app
       run: dotnet publish
