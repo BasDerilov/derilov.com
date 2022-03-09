@@ -25,10 +25,9 @@ jobs:
   deploy:
     
     runs-on: self-hosted
+    continue-on-error: true
 
     steps:
-
-      continue-on-error: true
     - name: Stop previous processes
       run: kill `pgrep dotnet`
     - name: Publish app
