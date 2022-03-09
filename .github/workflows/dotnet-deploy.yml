@@ -26,11 +26,11 @@ jobs:
     
     runs-on: self-hosted
     env:
-      DOTNET-PID: pgrep dotnet
+      DOTNET_PID: pgrep dotnet
 
     steps:
     - name: Kill running server if present
-      if: env.DOTNET-PID != 0
+      if: env.DOTNET_PID != 0
       run: kill $DOTNET-PID
     
     - name: Publish app
