@@ -75,8 +75,8 @@ h1{
     @include gradient-background(map.get($g-merciful-enemy,1),map.get($g-merciful-enemy,2))
 }
 
-.UPG-background{
-    @include gradient-background(map.get($g-lion-milk,1), map.get($g-lion-milk,2));
+.minecraft-background{
+    @include gradient-background(map.get($g-adeles-second-love,1),map.get($g-adeles-second-love,2))
 }
 
 .home-holo{

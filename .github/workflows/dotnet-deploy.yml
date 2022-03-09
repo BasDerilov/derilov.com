@@ -21,31 +21,13 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Clean up
-      run: dotnet clean
 
   deploy:
     
     runs-on: self-hosted
 
     steps:
-
-    - name: Set environment variables
-      run: export DOTNET_PID=`pgrep dotnet`
     
-    - name: DEBUG PROCESS PID
-      run: echo $DOTNET_PID
-
-    - name: Kill running server if present
-      if: env.DOTNET_PID != ''
-      run: kill $DOTNET_PID
-    
-    - name: Build css
-      run: npm run build:css
-
-    - name: Publish app
-      run: dotnet publish
-
     - name: Deploy
-      run: export RUNNER_TRACKING_ID="" && nohup dotnet run &
-      #run: nohup dotnet ~/bin/Debug/net6.0/publish/fictionsplash.dll &
+      run: 
+      
