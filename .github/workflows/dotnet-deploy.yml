@@ -25,12 +25,14 @@ jobs:
   deploy:
     
     runs-on: self-hosted
-    env:
-      DOTNET_PID: pgrep dotnet
 
     steps:
+
+    - name: Set environment variables
+      run: export DOTNET_PID=`pgrep dotnet`
+    
     - name: Kill running server if present
-      if: env.DOTNET_PID != 0
+      if: env.DOTNET_PID != ''
       run: kill $DOTNET_PID
     
     - name: Publish app
