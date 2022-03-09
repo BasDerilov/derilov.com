@@ -24,6 +24,8 @@ jobs:
     
   deploy:
     
+    runs-on: self-hosted
+
     steps:
     - name: Deploy
       run: dotnet run --no-build
