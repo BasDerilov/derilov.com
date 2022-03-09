@@ -25,12 +25,16 @@ jobs:
   deploy:
     
     runs-on: self-hosted
-    continue-on-error: true
+    env:
+      DOTNET-PID: pgrep dotnet
 
     steps:
     - name: Kill running server if present
-      run: kill `pgrep dotnet || echo 0`
+      if: $DOTNET-PID != null
+      run: kill `pgrep dotnet`
+    
     - name: Publish app
       run: dotnet publish
+    
     - name: Deploy
       run: nohup dotnet ~/bin/Debug/net6.0/publish/fictionsplash.dll &
