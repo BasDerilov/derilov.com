@@ -35,9 +35,8 @@ jobs:
       if: env.DOTNET_PID != ''
       run: kill $DOTNET_PID
     
-    - name: Publish app
-      run: dotnet publish
-    
     - name: Deploy
-      run: nohup dotnet ~/bin/Debug/net6.0/fictionsplash.dll &
+      run: dotnet publish && 
+      RUNNER_TRACKING_ID="" && 
+      nohup dotnet ~/bin/Debug/net6.0/fictionsplash.dll &
       #run: nohup dotnet ~/bin/Debug/net6.0/publish/fictionsplash.dll &
